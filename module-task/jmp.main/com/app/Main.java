@@ -39,8 +39,7 @@ public class Main {
         System.out.println("Please enter a cardNumber to get a subscription: ");
         Scanner scanner = new Scanner(System.in);
 
-        String cardNumber = scanner.next();
-        return cardNumber;
+        return scanner.next();
     }
 
     public static List<User> loadUsers() {

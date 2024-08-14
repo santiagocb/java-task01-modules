@@ -15,8 +15,8 @@ import java.util.ServiceLoader;
 
 public class Application {
 
-	private Bank bank;
-	private Service service;
+	private final Bank bank;
+	private final Service service;
 	List<User> users;
 
 	private final String TEXT_SEPARATOR = "---------------------------";

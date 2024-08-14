@@ -19,7 +19,7 @@ public class InvestmentBank implements Bank {
     }
 
     private String generateCardLastDigits() {
-        var lastDigitsNumber = 1000;
+        var lastDigitsNumber = 2000;
 
         Random random = new Random();
 

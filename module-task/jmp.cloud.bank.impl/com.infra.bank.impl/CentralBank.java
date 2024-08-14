@@ -2,6 +2,7 @@ package com.infra.bank.impl;
 
 import com.bank.api.Bank;
 import com.dto.*;
+import com.factory.BankCardFactory;
 
 import java.util.Random;
 
@@ -13,13 +14,13 @@ public class CentralBank implements Bank {
     @Override
     public BankCard createBankCard(User user, BankCardType cardType) {
         return switch (cardType) {
-            case CREDIT -> new CreditBankCard(CENTRAL_CREDIT_CARD_FIRST_DIGITS + generateCardLastDigits(), user);
-            case DEBIT -> new DebitBankCard(CENTRAL_DEBIT_CARD_FIRST_DIGITS + generateCardLastDigits(), user);
+            case CREDIT -> createCard(CreditBankCard::new, CENTRAL_CREDIT_CARD_FIRST_DIGITS + generateCardLastDigits(), user);
+            case DEBIT  -> createCard(DebitBankCard::new, CENTRAL_DEBIT_CARD_FIRST_DIGITS + generateCardLastDigits(), user);
         };
     }
 
     private String generateCardLastDigits() {
-        var lastDigitsNumber = 1000;
+        var lastDigitsNumber = 3000;
 
         Random random = new Random();
 
@@ -27,4 +28,7 @@ public class CentralBank implements Bank {
         return String.valueOf(randomInt);
     }
 
+    private BankCard createCard(BankCardFactory factory, String cardDigits, User user) {
+        return factory.createBankCard(cardDigits, user);
+    }
 }
